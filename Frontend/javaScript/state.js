@@ -60,7 +60,7 @@ async function loadDestinations() {
     try {
 
         const response = await fetch(
-            `http://localhost:3000/api/destinations?state=${encodeURIComponent(selectedState)}`
+            `/api/destinations?state=${encodeURIComponent(selectedState)}`
         );
 
         if (!response.ok) {
@@ -96,7 +96,7 @@ loadDestinations();
 async function getImage(query) {
 
     const response = await fetch(
-        `http://localhost:3000/api/image?query=${encodeURIComponent(query)}`
+        `/api/image?query=${encodeURIComponent(query)}`
     );
 
     const data = await response.json();
