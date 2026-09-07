@@ -46,7 +46,7 @@ let transportConnection = null;
 
 async function getImage(query) {
   const response = await fetch(
-    `http://localhost:3000/api/image?query=${encodeURIComponent(query)}`,
+    `/api/image?query=${encodeURIComponent(query)}`,
   );
   const data = await response.json();
   return data.image || "";
@@ -758,7 +758,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const response = await fetch("http://localhost:3000/api/transport", {
+    const response = await fetch("/api/transport", {
       method: "POST",
 
       headers: {
@@ -1027,9 +1027,9 @@ document.addEventListener("DOMContentLoaded", () => {
     renderWires();
   }
 
- // ===== CLEAR BOARD =====
+  // ===== CLEAR BOARD =====
 
-function clearBoard() {
+  function clearBoard() {
 
     getCards().forEach((card) => card.remove());
 
@@ -1042,25 +1042,25 @@ function clearBoard() {
     renderWires();
 
     updateEmptyState();
-}
+  }
 
 
-const clearButton = [...document.querySelectorAll(".toolbar-btn")].find((button) =>
+  const clearButton = [...document.querySelectorAll(".toolbar-btn")].find((button) =>
     button.textContent.toLowerCase().includes("clear board"),
-);
+  );
 
-if (clearButton) {
+  if (clearButton) {
     clearButton.addEventListener("click", () => {
 
-        const confirmed = confirm(
-            "Clear all destinations from your whiteboard?"
-        );
+      const confirmed = confirm(
+        "Clear all destinations from your whiteboard?"
+      );
 
-        if (!confirmed) return;
+      if (!confirmed) return;
 
-        clearBoard();
+      clearBoard();
     });
-}
+  }
 
   // ===== EMPTY STATE =====
 
@@ -1264,7 +1264,7 @@ if (clearButton) {
         destinations: routableDestinations
       }, null, 2)
     );
-    const response = await fetch("http://localhost:3000/api/optimization/matrix", {
+    const response = await fetch("/api/optimization/matrix", {
       method: "POST",
 
       headers: {
@@ -1653,42 +1653,42 @@ if (clearButton) {
 
     journeyResultOverlay.hidden = true;
 
-});
+  });
 
 
-discardJourneyBtn.addEventListener("click", () => {
+  discardJourneyBtn.addEventListener("click", () => {
 
     discardConfirmOverlay.hidden = false;
 
-});
+  });
 
-discardCancelBtn.addEventListener("click", () => {
+  discardCancelBtn.addEventListener("click", () => {
     discardConfirmOverlay.hidden = true;
-});
+  });
 
-closeJourneyResult.addEventListener("click",() => {
-  journeyResultOverlay.hidden = true;
-});
+  closeJourneyResult.addEventListener("click", () => {
+    journeyResultOverlay.hidden = true;
+  });
 
-keepBoardBtn.addEventListener("click", () => {
+  keepBoardBtn.addEventListener("click", () => {
 
     discardConfirmOverlay.hidden = true;
     journeyResultOverlay.hidden = true;
 
-});
+  });
 
-eraseBoardBtn.addEventListener("click", () => {
+  eraseBoardBtn.addEventListener("click", () => {
 
     clearBoard();
     discardConfirmOverlay.hidden = true;
     journeyResultOverlay.hidden = true;
 
-});
+  });
 
 
-printJourneyBtn.addEventListener("click", () => {
+  printJourneyBtn.addEventListener("click", () => {
     window.print();
-});
+  });
 
   // ===== INITIALIZE =====
 
