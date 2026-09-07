@@ -1,10 +1,12 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 const destinationRoutes = require("./routes/destinationRoutes");
 const optimizationRoutes = require("./routes/optimizationRoutes");
 
 const app = express();
+app.use(express.static(path.join(__dirname, "../Frontend")));
 
 app.use(cors());
 app.use(express.json());
