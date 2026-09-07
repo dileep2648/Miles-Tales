@@ -16,7 +16,7 @@ app.use("/api/optimization", optimizationRoutes);
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-    res.send("Bharat backend is running!");
+    res.sendFile(path.join(__dirname, "../Frontend/bharath.html"));
 });
 
 app.get("/api/test", (req, res) => {
