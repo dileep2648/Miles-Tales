@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bharat — Your Whiteboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,560;0,9..144,650;1,9..144,450;1,9..144,560&family=Work+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../Css/board.css">
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">Bharat<span class="dot">·</span></div>
+      <nav>
+        <a href="../bharath.html">Explore more</a>
+      </nav>
+    </div>
+    <div class="ornament-divider">
+      <svg width="70" height="12" viewBox="0 0 70 12" fill="none">
+        <path d="M0 6 H24" stroke="currentColor" stroke-width="1" />
+        <circle cx="35" cy="6" r="3.2" stroke="currentColor" stroke-width="1" />
+        <path d="M35 1 L35 3.5 M35 8.5 L35 11 M30 6 L32.5 6 M37.5 6 L40 6" stroke="currentColor" stroke-width="1" />
+        <path d="M46 6 H70" stroke="currentColor" stroke-width="1" />
+      </svg>
+    </div>
+  </header>
+
+  <!-- TRANSPORT PANEL -->
+  <div class="transport-overlay" id="transportOverlay">
+
+    <div class="transport-panel">
+
+      <button class="transport-close" id="transportClose">×</button>
+
+      <span class="eyebrow">Plan This Leg</span>
+
+      <h2 id="transportRoute">
+        Munnar → Kochi
+      </h2>
+
+      <p class="transport-subtitle">
+        How would you like to travel between these destinations?
+      </p>
+
+      <div class="transport-options">
+
+        <button class="transport-option" data-mode="car">
+          <span class="transport-icon">🚗</span>
+          <span>
+            <strong>Car</strong>
+            <small>Flexible & private</small>
+          </span>
+        </button>
+
+        <button class="transport-option" data-mode="bus">
+          <span class="transport-icon">🚌</span>
+          <span>
+            <strong>Bus</strong>
+            <small>Affordable option</small>
+          </span>
+        </button>
+
+        <button class="transport-option" data-mode="train">
+          <span class="transport-icon">🚆</span>
+          <span>
+            <strong>Train</strong>
+            <small>Comfortable journey</small>
+          </span>
+        </button>
+
+        <button class="transport-option" data-mode="flight">
+          <span class="transport-icon">✈️</span>
+          <span>
+            <strong>Flight</strong>
+            <small>Fastest option</small>
+          </span>
+        </button>
+
+      </div>
+
+      <button class="transport-continue" id="transportContinue">
+        Continue →
+      </button>
+
+    </div>
+
+  </div>
+
+  <main>
+
+    <section class="hero">
+      <span class="eyebrow">Your Whiteboard</span>
+      <h1 style="margin-top:10px;">Your Journey, <em>Taking Shape</em></h1>
+      <p>Collect the places you want to experience. We'll help you turn them into a journey.</p>
+    </section>
+
+    <!-- ===================== POPULATED BOARD ===================== -->
+    <section class="whiteboard-layout" id="populatedView">
+
+      <div class="canvas-wrap">
+        <div class="canvas-toolbar">
+          <div class="toolbar-left">
+            <span class="eyebrow">6 places pinned</span>
+          </div>
+          <div class="toolbar-right">
+            <button class="toolbar-btn" title="Rearrange your pinned destinations">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M4 8h16M4 16h16" stroke-linecap="round" />
+                <circle cx="8" cy="8" r="1.4" fill="currentColor" stroke="none" />
+                <circle cx="16" cy="16" r="1.4" fill="currentColor" stroke="none" />
+              </svg>
+              Rearrange
+            </button>
+            <button class="toolbar-btn" title="Remove all destinations from the board">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m2 0-1 13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1L6 7"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              Clear board
+            </button>
+          </div>
+        </div>
+
+        <div class="board-canvas" id="board">
+          <svg class="route-lines" viewBox="0 0 970 700" preserveAspectRatio="none">
+          </svg>
+
+          <!-- Card 1 -->
+          <article class="pin-card card-1">
+            <span class="pin-mark"><svg viewBox="0 0 20 20">
+                <circle cx="10" cy="10" r="6" fill="#B65432" />
+                <circle cx="10" cy="10" r="2" fill="#8F5F17" />
+              </svg></span>
+            <button class="remove-btn" title="Remove from board">×</button>
+            <div class="card-photo"><img src="https://picsum.photos/seed/tajmahal/400/280" alt="Taj Mahal at sunrise">
+            </div>
+            <div class="card-body">
+              <h3>Taj Mahal</h3>
+              <p class="card-meta">Agra, Uttar Pradesh <span class="divider-dot">·</span> <span
+                  class="cat">Heritage</span></p>
+              <p class="card-desc">A marble ode to eternal love, best seen at first light before the crowds arrive.</p>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="pin-card card-2">
+            <span class="pin-mark"><svg viewBox="0 0 20 20">
+                <circle cx="10" cy="10" r="6" fill="#5B7358" />
+                <circle cx="10" cy="10" r="2" fill="#465C43" />
+              </svg></span>
+            <button class="remove-btn" title="Remove from board">×</button>
+            <div class="card-photo"><img src="https://picsum.photos/seed/keralabackwaters/400/280"
+                alt="Kerala backwaters"></div>
+            <div class="card-body">
+              <h3>Alleppey Backwaters</h3>
+              <p class="card-meta">Kerala <span class="divider-dot">·</span> <span class="cat">Nature</span></p>
+              <p class="card-desc">Drift past palm-lined canals on a slow houseboat, the pace of the coast made literal.
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="pin-card card-3">
+            <span class="pin-mark"><svg viewBox="0 0 20 20">
+                <circle cx="10" cy="10" r="6" fill="#C68A2E" />
+                <circle cx="10" cy="10" r="2" fill="#8F5F17" />
+              </svg></span>
+            <button class="remove-btn" title="Remove from board">×</button>
+            <div class="card-photo"><img src="https://picsum.photos/seed/jaipurpalace/400/280" alt="Hawa Mahal, Jaipur">
+            </div>
+            <div class="card-body">
+              <h3>Hawa Mahal</h3>
+              <p class="card-meta">Jaipur, Rajasthan <span class="divider-dot">·</span> <span
+                  class="cat">Heritage</span></p>
+              <p class="card-desc">A honeycomb of 953 windows, built so royal women could watch the street unseen.</p>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="pin-card card-4">
+            <span class="pin-mark"><svg viewBox="0 0 20 20">
+                <circle cx="10" cy="10" r="6" fill="#B65432" />
+                <circle cx="10" cy="10" r="2" fill="#8F5F17" />
+              </svg></span>
+            <button class="remove-btn" title="Remove from board">×</button>
+            <div class="card-photo"><img src="https://picsum.photos/seed/goabeach/400/280" alt="Goa coastline"></div>
+            <div class="card-body">
+              <h3>Palolem Beach</h3>
+              <p class="card-meta">Goa <span class="divider-dot">·</span> <span class="cat">Coast</span></p>
+              <p class="card-desc">A curved bay of quiet shacks and warm tide, unhurried by design.</p>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="pin-card card-5">
+            <span class="pin-mark"><svg viewBox="0 0 20 20">
+                <circle cx="10" cy="10" r="6" fill="#5B7358" />
+                <circle cx="10" cy="10" r="2" fill="#465C43" />
+              </svg></span>
+            <button class="remove-btn" title="Remove from board">×</button>
+            <div class="card-photo"><img src="https://picsum.photos/seed/ladakhmountains/400/280"
+                alt="Ladakh mountain roads"></div>
+            <div class="card-body">
+              <h3>Pangong Lake</h3>
+              <p class="card-meta">Ladakh <span class="divider-dot">·</span> <span class="cat">Adventure</span></p>
+              <p class="card-desc">A high-altitude blue that shifts through the day, framed by bare mountain.</p>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="pin-card card-6">
+            <span class="pin-mark"><svg viewBox="0 0 20 20">
+                <circle cx="10" cy="10" r="6" fill="#C68A2E" />
+                <circle cx="10" cy="10" r="2" fill="#8F5F17" />
+              </svg></span>
+            <button class="remove-btn" title="Remove from board">×</button>
+            <div class="card-photo"><img src="https://picsum.photos/seed/varanasighats/400/280"
+                alt="Varanasi ghats at dusk"></div>
+            <div class="card-body">
+              <h3>Dashashwamedh Ghat</h3>
+              <p class="card-meta">Varanasi, Uttar Pradesh <span class="divider-dot">·</span> <span
+                  class="cat">Spiritual</span></p>
+              <p class="card-desc">Oil lamps, river bells, and the oldest continuously living city on earth.</p>
+            </div>
+          </article>
+        </div>
+        <div class="route-prompt" id="routePrompt" hidden>
+
+          <div class="route-prompt-content">
+
+            <span class="eyebrow">Plan your journey</span>
+
+            <p id="routePromptText">
+              Choose where your journey starts
+            </p>
+
+          </div>
+
+          <div class="route-type-options" id="routeTypeOptions" hidden>
+
+            <button class="route-type-btn" id="openRouteBtn" type="button">
+              ↗ Open
+            </button>
+
+            <button class="route-type-btn" id="closedRouteBtn" type="button">
+              ↻ Closed
+            </button>
+
+          </div>
+
+          <button class="route-skip" id="routeSkip" type="button" title="Skip" aria-label="Skip this step">
+            ↓
+          </button>
+
+        </div>
+      </div>
+
+      <aside class="trip-panel">
+        <div class="card-panel trip-summary">
+          <span class="eyebrow">Trip Summary</span>
+          <h2>Your Trip</h2>
+          <ul class="summary-list">
+            <li><span>Destinations</span><strong>6</strong></li>
+            <li><span>States covered</span><strong>5</strong></li>
+            <li><span>Estimated duration</span><strong>10–12 days</strong></li>
+          </ul>
+          <button class="btn-outline">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 5v14M5 12h14" stroke-linecap="round" />
+            </svg>
+            Add Destination
+          </button>
+        </div>
+
+        <div class="card-panel route-cta">
+          <span class="eyebrow">Bharat's Signature</span>
+          <p class="lede">Six places, one story waiting to connect them.</p>
+          <button class="btn-primary" id="routeBtn">
+            Help me route it out →
+          </button>
+          <button class="btn-route-shape" id="shapeJourneyBtn">
+            Shape My Journey
+          </button>
+          <p class="route-note">We'll sequence your stops, estimate travel time between them, and suggest a realistic
+            pace.</p>
+        </div>
+        </div>
+      </aside>
+
+    </section>
+
+    <!-- ===================== EMPTY BOARD (toggle preview) ===================== -->
+    <section class="whiteboard-layout" id="emptyView" hidden>
+      <div class="canvas-wrap" style="width:100%;">
+        <div class="empty-board">
+          <svg class="compass" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="26" stroke="currentColor" stroke-width="1.4" />
+            <circle cx="32" cy="32" r="1.8" fill="currentColor" />
+            <path d="M32 10 L36 30 L32 34 L28 30 Z" fill="currentColor" opacity="0.85" />
+            <path d="M32 54 L28 34 L32 30 L36 34 Z" fill="currentColor" opacity="0.35" />
+          </svg>
+          <h2>Your journey starts here</h2>
+          <p>Wander through India's states and pin the places that pull at you — we'll gather them on your board.</p>
+          <button class="btn-hero">Explore Destinations</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="dev-toggle">
+      <button id="toggleBtn" type="button">Preview empty board state</button>
+    </div>
+
+  </main>
+
+
+
+  <!-- JOURNEY RESULT MODAL -->
+  <div id="journeyResultOverlay" class="journey-result-overlay" hidden>
+
+    <div id="journeyResultModal" class="journey-result-modal">
+
+      <!-- HEADER -->
+      <header class="journey-result-header">
+
+        <div>
+          <span class="journey-result-eyebrow">
+            BHARAT JOURNEY
+          </span>
+
+          <h2 id="journeyResultTitle">
+            Your journey is taking shape
+          </h2>
+
+          <p id="journeyResultSubtitle">
+            Your optimized journey is ready to review.
+          </p>
+        </div>
+
+        <button type="button" id="closeJourneyResultBtn" class="journey-result-close" aria-label="Close journey result">
+          ×
+        </button>
+
+      </header>
+
+
+      <!-- MAIN CONTENT -->
+      <main class="journey-result-content">
+
+        <!-- ROUTE -->
+        <section class="journey-route-section">
+
+          <div class="section-heading">
+            <span>YOUR ROUTE</span>
+            <h3>Journey sequence</h3>
+          </div>
+
+          <div id="journeyRouteList" class="journey-route-list">
+            <!-- Route stops will be inserted by JS -->
+          </div>
+
+        </section>
+
+
+        <!-- SUMMARY -->
+        <aside class="journey-summary">
+
+          <div class="section-heading">
+            <span>JOURNEY SUMMARY</span>
+            <h3>Your trip at a glance</h3>
+          </div>
+
+          <div class="journey-summary-grid">
+
+            <div class="journey-summary-item">
+              <span>Destinations</span>
+              <strong id="journeyDestinationCount">—</strong>
+            </div>
+
+            <div class="journey-summary-item">
+              <span>Total distance</span>
+              <strong id="journeyTotalDistance">—</strong>
+            </div>
+
+            <div class="journey-summary-item">
+              <span>Travel time</span>
+              <strong id="journeyTotalDuration">—</strong>
+            </div>
+
+            <div class="journey-summary-item">
+              <span>Journey type</span>
+              <strong id="journeyType">—</strong>
+            </div>
+
+          </div>
+
+
+          <!-- TRANSPORT PREVIEW -->
+          <div class="journey-transport-preview">
+
+            <span>TRANSPORT</span>
+
+            <p>
+              Transport options can be configured for each connection
+              after confirming your journey.
+            </p>
+
+          </div>
+
+        </aside>
+
+      </main>
+
+
+      <!-- ACTION BAR -->
+      <footer class="journey-result-actions">
+
+        <button type="button" id="editJourneyBtn" class="journey-action secondary">
+          ← Edit Journey
+        </button>
+
+        <div class="journey-action-group">
+
+          <button type="button" id="discardJourneyBtn" class="journey-action danger">
+            Discard
+          </button>
+
+          <button type="button" id="printJourneyBtn" class="journey-action secondary">
+            Print
+          </button>
+
+          <button type="button" id="confirmJourneyBtn" class="journey-action primary">
+            Confirm Journey
+          </button>
+
+        </div>
+
+      </footer>
+
+    </div>
+
+  </div>
+
+  <!-- Discard Confirmation -->
+  <div id="discardConfirmOverlay" class="discard-confirm-overlay" hidden>
+    <div class="discard-confirm-modal">
+
+      <button type="button" id="discardCancelBtn" class="discard-close" aria-label="Close">
+        ×
+      </button>
+
+      <h3>Discard this journey?</h3>
+
+      <p>
+        What would you like to discard?
+      </p>
+
+      <div class="discard-options">
+
+        <button type="button" id="keepBoardBtn" class="discard-option">
+          <strong>Keep Board</strong>
+          <span>
+            Discard the generated route and keep my destinations.
+          </span>
+        </button>
+
+        <button type="button" id="eraseBoardBtn" class="discard-option danger">
+          <strong>Erase Board</strong>
+          <span>
+            Discard the route and clear all destinations.
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <span class="logo" style="font-size:16px;">Bharat<span class="dot">·</span></span>
+      <span>Crafted for the way India is actually explored.</span>
+    </div>
+  </footer>
+
+  <script src="../javaScript/board.js"></script>
+
+</body>
+
+</html>

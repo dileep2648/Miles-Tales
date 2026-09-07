@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bharat Trails — Explore Kerala</title>
+    <link rel="stylesheet" href="../css/state.css">
+</head>
+
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+
+    <header class="state-navbar">
+
+        <a href="../bharath.html" class="back-link">
+            ← Back to India Map
+        </a>
+        <a href="board.html" class="back-link">
+            ← TO whiteboard  
+        </a>
+        <a href="../index.html" class="logo">
+            <span class="logo-mark">✦</span>
+            <span>Bharat Trails</span>
+        </a>
+
+        <div class="trip-actions">
+
+            <button class="trip-button" id="tripButton">
+                Your Trip
+                <span class="trip-count" id="tripCount">0</span>
+            </button>
+
+            <button class="plan-button" id="planTripButton">
+                Plan Trip →
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- ==================== STATE HERO ==================== -->
+
+        <section class="state-hero">
+
+            <div class="state-hero-content">
+
+                <span class="section-label" id="stateRegionLabel">
+                    EXPLORE SOUTH INDIA
+                </span>
+
+                <h1 id="stateName">
+                    Kerala
+                </h1>
+
+                <p class="state-tagline" id="stateTagline">
+                    God's Own Country
+                </p>
+
+                <p class="state-description" id="stateDescription">
+                    Backwaters, beaches, hill stations and lush
+                    greenery — experience the true essence of Kerala.
+                </p>
+
+                <div class="state-stats">
+
+                    <div class="stat">
+                        <strong id="destinationCount">5</strong>
+                        <span>Destinations</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong id="categoryCount">6</strong>
+                        <span>Categories</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong id="averageRating">4.3</strong>
+                        <span>Average Rating</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="state-hero-image">
+
+                <img id="stateHeroImage" src="https://wallpaperaccess.com/full/1635200.jpg" alt="Kerala landscape">
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================== CATEGORY FILTERS ==================== -->
+
+        <section class="category-section">
+
+            <div class="category-tabs" id="categoryTabs">
+
+                <button class="category-tab active" data-category="all">
+                    All
+                </button>
+
+                <button class="category-tab" data-category="nature">
+                    🌿 Nature
+                </button>
+
+                <button class="category-tab" data-category="heritage">
+                    🏛️ Heritage
+                </button>
+
+                <button class="category-tab" data-category="culture">
+                    🎭 Culture
+                </button>
+
+                <button class="category-tab" data-category="adventure">
+                    🧭 Adventure
+                </button>
+
+                <button class="category-tab" data-category="spirituality">
+                    🛕 Spiritual
+                </button>
+
+                <button class="category-tab" data-category="food">
+                    🍛 Food
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================== DESTINATIONS ==================== -->
+
+        <section class="destinations-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">
+                        DISCOVER
+                    </span>
+
+                    <h2>
+                        Explore Destinations
+                    </h2>
+                </div>
+
+
+                <div class="sort-container">
+
+                    <label for="sortSelect">
+                        Sort by
+                    </label>
+
+                    <select id="sortSelect">
+
+                        <option value="recommended">
+                            Recommended
+                        </option>
+
+                        <option value="rating">
+                            Highest Rated
+                        </option>
+
+                        <option value="reviews">
+                            Most Reviewed
+                        </option>
+
+                        <option value="name">
+                            Name
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- JS will populate this -->
+
+            <div class="destination-grid" id="destinationsGrid">
+            <div class="d-cards">
+                <div class="img-card">  
+                </div>
+                <div class="info">
+                    <div class="title">
+
+                    </div>
+                    <div class="desc">
+
+                    </div>
+                    <div class="rating">
+                        ★ 4.7
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==================== DESTINATION MODAL ==================== -->
+
+    <div class="modal hidden" id="destinationModal" aria-hidden="true">
+
+        <div class="modal-overlay" data-close-modal></div>
+
+        <div class="modal-content">
+
+            <button class="modal-close" id="closeModal" aria-label="Close">
+                ×
+            </button>
+
+            <img id="modalImage" src="" alt="">
+
+            <div class="modal-body">
+
+                <span class="destination-category" id="modalCategory">
+                </span>
+
+                <h2 id="modalTitle">
+                    Munnar
+                </h2>
+
+                <div class="modal-rating" id="modalRating">
+                    ★ 4.7
+                </div>
+
+                <p id="modalDescription">
+                </p>
+
+                <div class="modal-location" id="modalLocation">
+                </div>
+
+                <button class="add-trip-button" id="modalAddButton">
+                    + Add to Trip
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="../data/states.js"></script>
+    <script src="../data/destinations.js"></script>
+    <script src="../javaScript/state.js"></script>
+
+</body>
+
+</html>

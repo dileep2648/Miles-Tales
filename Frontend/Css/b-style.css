@@ -1,0 +1,414 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
+
+:root {
+  --bg: #F6F3EC;
+  --paper: #FFFFFF;
+  --ink: #181B22;
+  --ink-soft: #5B5E68;
+  --ink-faint: #9A968A;
+  --line: #E1DACB;
+
+  /* Indian-inspired palette */
+  --accent: #1C6E62;
+  --accent-dark: #12463F;
+  --accent-soft: #DEEAE6;
+  --gold: #D9922F;
+  --gold-soft: #F6E7CD;
+
+  --radius: 14px;
+  --shadow-sm: 0 2px 10px -4px rgba(24, 27, 34, .12);
+  --shadow-md: 0 14px 34px -14px rgba(24, 27, 34, .28);
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+/* ---------- Base ---------- */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+button {
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+svg {
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+::selection {
+  background: var(--gold-soft);
+  color: var(--ink);
+}
+
+.screen{
+    display: flex;
+    gap: 40px;
+
+}
+
+.hero-content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+/* ---------- Header ---------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 34px;
+  background: rgba(246, 243, 236, .88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--ink);
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.brand-mark {
+  width: 26px;
+  height: 26px;
+  flex: none;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 14px;
+  border-radius: 100px;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.back-btn:hover {
+  background: #EFE9DB;
+  color: var(--ink);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 58px 24px 12px;
+  text-align: center;
+  animation: fade-up .6s var(--ease) both;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.eyebrow {
+  display: block;
+
+  margin-bottom: 8px;
+  color: var(--accent);
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(34px, 6vw, 58px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -.02em;
+}
+
+.hero h1 em {
+  color: var(--accent);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.hero p {
+  max-width: 540px;
+  margin: 16px auto 0;
+
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+  /* align-items: center; */
+  margin-top: 24px;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 22px;
+  border-radius: 100px;
+
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform .18s var(--ease),
+              background .18s var(--ease),
+              box-shadow .18s var(--ease);
+}
+
+.btn-ghost {
+  /* background: var(--paper); */
+  color: var(--ink);
+  /* border: 1px solid var(--line); */
+  font-size: 17px;
+  font-style: italic;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-ghost:hover {
+  transform: translateY(-1px);
+  border-color: var(--ink-faint);
+  box-shadow: var(--shadow-sm);
+  /* font-size: 22px; */
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: #231603;
+  margin-top: 15px;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-gold:hover {
+  transform: translateY(-1px);
+  background: #E2A044;
+  box-shadow: var(--shadow-md);
+}
+
+/* ---------- India Map ---------- */
+
+.map-wrap {
+  position: relative;
+  width: min(100% - 32px, 820px);
+  margin: 18px auto 0;
+  animation: fade-up .7s .08s var(--ease) both;
+}
+
+.india-svg {
+  display: block;
+  width: min(100%, 620px);
+  height: auto;
+  padding: 12px;
+  margin: 0 auto;
+  overflow: visible;
+  border: 2px solid #e5e5e5;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.india-svg path {
+  fill: #E7E2D7;
+  stroke: #8B8A83;
+  stroke-width: .8px;
+
+  transition:
+    fill .18s ease,
+    stroke .18s ease,
+    stroke-width .18s ease,
+    opacity .18s ease,
+    filter .18s ease;
+}
+
+/* Only the states currently supported by the app */
+.india-svg path.active-path {
+  fill: #F7F2E8;
+  stroke: #68766F;
+  stroke-width: 1px;
+  cursor: pointer;
+}
+
+.india-svg path.active-path:hover,
+.india-svg path.active-path.map-path-hover {
+  fill: var(--gold-soft);
+  stroke: var(--accent);
+  stroke-width: 2.2px;
+  filter: brightness(1.02);
+}
+
+.india-svg path.selected-path {
+  fill: var(--accent-soft);
+  stroke: var(--accent-dark);
+  stroke-width: 2.4px;
+}
+
+.map-hint {
+  margin-top: 4px;
+
+  color: var(--ink-faint);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  text-align: center;
+}
+
+.state-tooltip {
+  position: fixed;
+  display: none;
+  padding: 7px 12px;
+  background: #F7F2E8;
+  color: #35443D;
+  border: 1px solid #C9A227;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 9999;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(53, 68, 61, 0.18);
+  transition: opacity 0.15s ease;
+}
+
+/* ---------- Small stats strip ---------- */
+
+.state-count-strip {
+  display: flex;
+  justify-content: center;
+  gap: 75px;
+  flex-wrap: wrap;
+  /* font-size: 21px; */
+  margin: 24px auto 50px;
+  padding: 0 18px;
+}
+
+.strip-item {
+  color: var(--ink-faint);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+}
+
+.strip-item b {
+  color: var(--ink);
+  font-size: 18px;
+  font-style: italic;
+}
+
+ .border {
+    width: 100%;
+    height: 63px;
+    background-image: url("border.png");
+    background-repeat: repeat-x;
+    background-size: auto 70px;
+    background-position: center;
+    /* margin-top: 12px; */
+}
+
+
+/* ---------- Animation ---------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 640px) {
+  .topbar {
+    padding: 14px 18px;
+  }
+
+  .hero {
+    padding: 38px 18px 8px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 11px 17px;
+    font-size: 13px;
+  }
+
+  .map-wrap {
+    width: min(100% - 18px, 620px);
+  }
+
+  .state-count-strip {
+    gap: 14px 22px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
