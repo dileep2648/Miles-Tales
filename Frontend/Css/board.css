@@ -92,7 +92,7 @@
     letter-spacing:0.01em;
     color:var(--brown);
     display:flex;
-    align-items:baseline;
+    align-items: center;
     gap:6px;
   }
   .logo .dot{ color:var(--terracotta); font-size:20px; }
@@ -1090,7 +1090,6 @@
     padding: 20px;
 }
 
-
 /* ================================
    JOURNEY RESULT MODAL
 ================================ */
@@ -1462,6 +1461,193 @@
 .discard-option.danger:hover {
     border-color: #dc2626;
 }
+
+.logoSvg {
+    width: 32px;
+    /* height: 28px; */
+    object-fit: contain;
+}
+
+.prnt-out{
+    background-color: aliceblue;
+    padding: 8px 50px;
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#whiteboardPrintBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
+    filter: brightness(1.04);
+}
+
+#whiteboardPrintBtn:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+ 
+.print-success-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(35, 30, 25, 0.32);
+    backdrop-filter: blur(6px);
+
+    padding: 24px;
+}
+
+.print-success-card {
+    width: min(420px, 100%);
+    padding: 32px;
+
+    background: #fffdf9;
+    border: 1px solid rgba(182, 84, 50, 0.14);
+    border-radius: 22px;
+
+    box-shadow: 0 24px 70px rgba(40, 30, 20, 0.18);
+
+    text-align: center;
+
+    animation: trailPopupIn 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+
+}
+
+.print-success-icon {
+    width: 48px;
+    height: 48px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f3e3d9;
+    color: #b65432;
+
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.print-success-eyebrow {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #b65432;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+}
+
+.print-success-content h3 {
+    margin: 0 0 10px;
+
+    color: #29231f;
+
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.print-success-content p {
+    margin: 0 auto;
+
+    max-width: 330px;
+
+    color: #756b64;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.print-success-actions {
+    display: flex;
+    gap: 10px;
+
+    margin-top: 26px;
+}
+
+.trail-btn {
+    flex: 1;
+
+    padding: 12px 16px;
+
+    border-radius: 11px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+}
+
+.trail-btn:hover {
+    transform: translateY(-1px);
+}
+
+.trail-btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.trail-btn.secondary {
+    background: transparent;
+    border: 1px solid #ddd2ca;
+    color: #5f554e;
+}
+
+.trail-btn.secondary:hover {
+    background: #f8f3ef;
+}
+
+.trail-btn.primary {
+    border: 1px solid #b65432;
+    background: #b65432;
+    color: white;
+}
+
+.trail-btn.primary:hover {
+    box-shadow: 0 6px 16px rgba(182, 84, 50, 0.22);
+}
+
+.print-success-overlay {
+    opacity: 0;
+    animation: printOverlayIn 0.25s ease forwards;
+}
+
+@keyframes printOverlayIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes trailPopupIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 
 @media print {
 

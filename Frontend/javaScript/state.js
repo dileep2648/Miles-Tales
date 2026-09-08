@@ -1,4 +1,8 @@
-
+const API_BASE =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+        ? "http://localhost:3000"
+        : "";
 
 
 // =========================
@@ -59,9 +63,9 @@ async function loadDestinations() {
 
     try {
 
-        const response = await fetch(
-            `/api/destinations?state=${encodeURIComponent(selectedState)}`
-        );
+       const response = await fetch(
+    `${API_BASE}/api/destinations?state=${encodeURIComponent(selectedState)}`
+);
 
         if (!response.ok) {
             throw new Error("Failed to fetch destinations");
@@ -96,7 +100,7 @@ loadDestinations();
 async function getImage(query) {
 
     const response = await fetch(
-        `/api/image?query=${encodeURIComponent(query)}`
+        `${API_BASE}/api/image?query=${encodeURIComponent(query)}`
     );
 
     const data = await response.json();

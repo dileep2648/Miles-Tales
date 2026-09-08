@@ -17,7 +17,9 @@
 
   <header class="site-header">
     <div class="header-inner">
-      <div class="logo">Bharat<span class="dot">·</span></div>
+      <div class="logo">Miles & Tales<div class="logo">
+    <img src="../images/jeep.svg" alt="" class="logoSvg">
+</div></div>
       <nav>
         <a href="../bharath.html">Explore more</a>
       </nav>
@@ -263,25 +265,9 @@
       </div>
 
       <aside class="trip-panel">
-        <div class="card-panel trip-summary">
-          <span class="eyebrow">Trip Summary</span>
-          <h2>Your Trip</h2>
-          <ul class="summary-list">
-            <li><span>Destinations</span><strong>6</strong></li>
-            <li><span>States covered</span><strong>5</strong></li>
-            <li><span>Estimated duration</span><strong>10–12 days</strong></li>
-          </ul>
-          <button class="btn-outline">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 5v14M5 12h14" stroke-linecap="round" />
-            </svg>
-            Add Destination
-          </button>
-        </div>
-
         <div class="card-panel route-cta">
           <span class="eyebrow">Bharat's Signature</span>
-          <p class="lede">Six places, one story waiting to connect them.</p>
+          <p class="lede">Many places, one story waiting to connect them.</p>
           <button class="btn-primary" id="routeBtn">
             Help me route it out →
           </button>
@@ -290,6 +276,9 @@
           </button>
           <p class="route-note">We'll sequence your stops, estimate travel time between them, and suggest a realistic
             pace.</p>
+             <button type="button" id="whiteboardPrintBtn" class="prnt-out">
+          Print
+        </button>
         </div>
         </div>
       </aside>
@@ -481,6 +470,37 @@
 
     </div>
   </div>
+
+  <div id="printSuccessOverlay" class="print-success-overlay" hidden>
+    <div class="print-success-card">
+
+        <div class="print-success-icon">
+            ✓
+        </div>
+
+        <div class="print-success-content">
+            <span class="print-success-eyebrow">JOURNEY SAVED</span>
+
+            <h3>Printed! 🎉</h3>
+
+            <p>
+                Shall I clear the board for your next trail,
+                or should I hold on to this one?
+            </p>
+        </div>
+
+        <div class="print-success-actions">
+            <button id="preserveTrailBtn" class="trail-btn secondary">
+                Hold My Trail
+            </button>
+
+            <button id="clearForNextTrailBtn" class="trail-btn primary">
+                Clear for Next Trail
+            </button>
+        </div>
+
+    </div>
+</div>
   <footer>
     <div class="footer-inner">
       <span class="logo" style="font-size:16px;">Bharat<span class="dot">·</span></span>

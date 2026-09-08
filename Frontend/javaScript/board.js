@@ -5,6 +5,14 @@
 // ===== IMAGE API =====
 
 
+const API_BASE =
+  window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+    ? "http://localhost:3000"
+    : "";
+
+
+
 const routeBtn = document.getElementById("routeBtn");
 const routePrompt = document.getElementById("routePrompt");
 const routePromptText = document.getElementById("routePromptText");
@@ -31,6 +39,10 @@ const discardJourneyBtn = document.getElementById("discardJourneyBtn");
 const closeJourneyResult = document.getElementById("closeJourneyResultBtn")
 const printJourneyBtn = document.getElementById("printJourneyBtn");
 
+const printSuccessOverlay = document.querySelector("#printSuccessOverlay");
+const preserveTrailBtn = document.querySelector("#preserveTrailBtn");
+const clearForNextTrailBtn = document.querySelector("#clearForNextTrailBtn");
+
 let routeType = null;
 
 let routeMode = false;
@@ -40,13 +52,12 @@ let routeStartCard = null;
 let routeEndCard = null;
 
 
-let selectedTransport = null;
+
 let activeConnection = null;
-let transportConnection = null;
 
 async function getImage(query) {
   const response = await fetch(
-    `/api/image?query=${encodeURIComponent(query)}`,
+    `${API_BASE}/api/image?query=${encodeURIComponent(query)}`,
   );
   const data = await response.json();
   return data.image || "";
@@ -687,7 +698,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         saveLayout();
 
-        openTransportPanel(newConnection);
 
         console.log("Connection created:", newConnection);
       }
@@ -758,7 +768,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const response = await fetch("/api/transport", {
+    const response = await fetch(`${API_BASE}/api/transport`, {
       method: "POST",
 
       headers: {
@@ -835,6 +845,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const pathData = createBezierPath(start, end, connection.fromSide, connection.toSide);
 
+      const { control1, control2 } = getControlPoints(
+        start,
+        end,
+        connection.fromSide,
+        connection.toSide
+      );
+
+      const t = 0.5;
+      const mt = 1 - t;
+
+      const curveMidX =
+        mt * mt * mt * start.x +
+        3 * mt * mt * t * control1.x +
+        3 * mt * t * t * control2.x +
+        t * t * t * end.x;
+
+      const curveMidY =
+        mt * mt * mt * start.y +
+        3 * mt * mt * t * control1.y +
+        3 * mt * t * t * control2.y +
+        t * t * t * end.y;
+
       /*
        * Group
        */
@@ -844,7 +876,7 @@ document.addEventListener("DOMContentLoaded", () => {
       group.classList.add("board-wire");
 
       group.dataset.connection = index;
-
+      group.style.cursor = "pointer";
       /*
        * Invisible wide hit area
        */
@@ -909,6 +941,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
       routeSvg.appendChild(group);
 
+      const removeButton = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "text"
+      );
+
+      removeButton.textContent = "×";
+      removeButton.setAttribute("x", curveMidX);
+      removeButton.setAttribute("y", curveMidY);
+      removeButton.setAttribute("text-anchor", "middle");
+      removeButton.setAttribute("font-size", "24");
+      removeButton.setAttribute("font-weight", "bold");
+      removeButton.setAttribute("fill", "#B65432");
+      removeButton.setAttribute("pointer-events", "all");
+      removeButton.style.display = "none";
+      removeButton.style.cursor = "pointer";
+      removeButton.style.userSelect = "none";
+
+      group.appendChild(removeButton);
+
+      removeButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        connections = connections.filter(
+          (item) => item.id !== connection.id
+        );
+
+        saveLayout();
+        renderWires();
+      });
+
+
       /*
        * Connection click
        *
@@ -916,10 +979,16 @@ document.addEventListener("DOMContentLoaded", () => {
        * transport information panel.
        */
 
-      hitPath.addEventListener("click", (event) => {
-        event.stopPropagation();
+      group.addEventListener("mouseenter", () => {
+        visiblePath.setAttribute("stroke-width", "4");
+        visiblePath.setAttribute("opacity", "1");
+        removeButton.style.display = "block";
+      });
 
-        console.log("Connection selected:", connection);
+      group.addEventListener("mouseleave", () => {
+        visiblePath.setAttribute("stroke-width", "2.4");
+        visiblePath.setAttribute("opacity", "0.72");
+        removeButton.style.display = "none";
       });
     });
   }
@@ -1264,7 +1333,7 @@ document.addEventListener("DOMContentLoaded", () => {
         destinations: routableDestinations
       }, null, 2)
     );
-    const response = await fetch("/api/optimization/matrix", {
+    const response = await fetch(`${API_BASE}/api/optimization/matrix`, {
       method: "POST",
 
       headers: {
@@ -1516,6 +1585,22 @@ document.addEventListener("DOMContentLoaded", () => {
     journeyResultOverlay.hidden = false;
   }
 
+  function getManualRoute() {
+    if (connections.length === 0) {
+        return [];
+    }
+
+    const route = [connections[0].from];
+
+    connections.forEach(connection => {
+        if (route[route.length - 1] === connection.from) {
+            route.push(connection.to);
+        }
+    });
+
+    return route;
+}
+
   function renderJourneyRoute(routeResult) {
 
     journeyRouteList.innerHTML = "";
@@ -1685,10 +1770,79 @@ document.addEventListener("DOMContentLoaded", () => {
 
   });
 
-
-  printJourneyBtn.addEventListener("click", () => {
+printJourneyBtn.addEventListener("click", () => {
     window.print();
-  });
+
+    setTimeout(() => {
+        printSuccessOverlay.hidden = false;
+    }, 500);
+});
+
+  const whiteboardPrintBtn = document.querySelector("#whiteboardPrintBtn");
+
+
+
+
+whiteboardPrintBtn.addEventListener("click", async () => {
+    const route = getManualRoute();
+
+    if (route.length < 2) {
+        alert("Connect at least two destinations first.");
+        return;
+    }
+
+    const saved = JSON.parse(
+        localStorage.getItem("bharatWhiteboard")
+    ) || [];
+
+    const destinations = route.map(id =>
+        saved.find(place => createDestinationId(place) === id)
+    ).filter(Boolean);
+
+    const indexRoute = destinations.map((_, index) => index);
+
+    const response = await fetch(`${API_BASE}/api/optimization/matrix`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            destinations,
+            startIndex: 0,
+            endIndex: destinations.length - 1,
+            roundTrip: false
+        })
+    });
+
+    const data = await response.json();
+
+    const manualRouteResult = {
+        optimizedRoute: indexRoute,
+        destinations: data.destinations,
+        matrix: data.matrix,
+        roundTrip: false
+    };
+
+    renderJourneyRoute(manualRouteResult);
+    showJourneyResult(manualRouteResult);
+
+   setTimeout(() => {
+    window.print();
+
+    setTimeout(() => {
+        printSuccessOverlay.hidden = false;
+    }, 500);
+}, 200);
+});
+
+preserveTrailBtn.addEventListener("click", () => {
+    printSuccessOverlay.hidden = true;
+});
+
+clearForNextTrailBtn.addEventListener("click", () => {
+    clearBoard();
+    printSuccessOverlay.hidden = true;
+});
 
   // ===== INITIALIZE =====
 
